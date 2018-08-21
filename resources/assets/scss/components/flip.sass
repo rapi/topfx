@@ -1,0 +1,21 @@
+.flip
+  .front
+    display: inline-block
+    transform: perspective(600px) rotateX(0deg)
+    -webkit-transform: perspective(600px) rotateY(0deg)
+    transition: transform .6s linear 0s
+    transition: -webkit-transform .6s linear 0s
+    backface-visibility: hidden
+    position: absolute
+  .back
+    transform: perspective(600px) rotateX(180deg)
+    backface-visibility: hidden
+    transition: transform .6s linear 0s
+    position: absolute
+
+.flip.flipped
+  .front
+    transform: perspective(600px) rotateX(-180deg)
+.flip.flipped
+  .back
+    transform: perspective(600px) rotateX(0deg)

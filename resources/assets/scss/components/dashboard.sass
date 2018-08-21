@@ -1,0 +1,28 @@
+// Start init default height
+html, body, #root
+  height: 100%
+
+// Start dashboard main
+.dashboard_
+  &_container
+  &_part
+    &Left
+      width: 270px
+      @include media-breakpoint-down(md)
+        border-bottom: 1px solid $primary
+
+      @include media-breakpoint-up(md)
+        box-shadow: 0 16px 38px -12px rgba(0,0,0,.56), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2)
+
+      @include media-breakpoint-down(sm)
+        width: 100%
+        
+    &Right
+      width: calc(100% - 270px)
+      padding: 1rem
+      @include media-breakpoint-down(md)
+        padding-top: 2rem
+      @include media-breakpoint-down(sm)
+        width: 100%
+
+

@@ -1,0 +1,34 @@
+.chart.primary
+  background-color: $primary
+.chart.info
+  background-color: $info
+.chart.success
+  background-color: $success
+.chart.warning
+  background-color: $warning
+.chart.danger
+  background-color: $danger
+.chart
+
+  .grid
+    .x>g:first-of-type
+      display: none
+    .y>g:last-of-type
+      display: none
+    path
+      display: none
+    .tick
+      line
+        stroke: white
+        stroke-opacity: 0.2
+        shape-rendering: crispEdges
+
+
+.dashboard__charts
+  &_item
+
+@include media-breakpoint-down(xs)
+  .dashboard__charts
+    &_item
+      padding-left: 0
+      padding-right: 0

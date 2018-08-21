@@ -1,0 +1,69 @@
+.dashboard__menu
+  &_item
+    &--Icon
+    &--Text
+    &--Link
+      // max-width: 30rem
+      padding: 0.4rem
+      &.active
+        background-color: $primary
+        color: $white
+      &:hover
+        text-decoration: none
+@include media-breakpoint-up(lg)
+  .dashboard__menu
+    &_item
+      &--Link
+        margin: 1rem 1rem 0 1rem
+        padding: 1rem 1.5rem 1rem
+        border-radius: 0.3rem
+        &.active
+        &:hover
+@include media-breakpoint-down(md)
+  .dashboard__menu
+    &_item
+      &--Link
+        padding: 0.6rem 0.9rem 0.6rem 0.9rem
+        &.active
+        &:hover     
+@include media-breakpoint-down(sm)
+  .dashboard__menu
+    &_item
+      &--Text
+        display: none
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+// .menu-item
+//   a
+//     max-width: 30rem
+//     padding: 0.4rem
+//   a.active
+//     background-color: $primary
+//     color: $white
+//   a:hover
+//     text-decoration: none
+// @include media-breakpoint-up(lg)
+//   .menu-item
+//     margin-bottom: 1rem
+//     a
+//       margin: 1rem
+//       padding: 1rem 1.5rem 1rem
+//       border-radius: 0.3rem
+// @include media-breakpoint-down(md)
+//   .menu-item
+//     a
+//       padding: 0.6rem 0.9rem 0.6rem 0.9rem
+//       font-size: 1.5rem

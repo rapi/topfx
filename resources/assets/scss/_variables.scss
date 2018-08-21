@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,700);
+
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+$font-family-sans-serif:      Roboto !default;
+$primary: #9c27b0;
+$success: #66bb6a;
+$warning: #ffa726;
+$danger: #ef5350;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+// $font-size-lg:                5rem !default;
+$font-size-sm:                1.2rem !default;
