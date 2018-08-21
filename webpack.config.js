@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //this is config webpack for Rapi
+const Dotenv=require('dotenv-webpack');
 module.exports = {
   entry: './resources/assets/js/index.js',
   output: {
@@ -12,8 +13,8 @@ module.exports = {
   resolve: {
     modules: [
       path.resolve(__dirname, 'node_modules'),
-      path.resolve(__dirname, 'resources', 'assets', 'js', 'components'),
       path.resolve(__dirname, 'resources', 'assets', 'js'),
+      path.resolve(__dirname, 'resources', 'assets', 'js', 'components'),
       path.resolve(__dirname, 'resources', 'assets', 'scss'),
     ],
     extensions: ['.js', '.jsx']
@@ -68,7 +69,7 @@ module.exports = {
       hash: true,
       template: 'resources/views/OHLC.blade.php' //relative to root of the application
     }),
-    // new Dotenv()
+    new Dotenv()
 
   ],
   devServer: {
@@ -76,7 +77,10 @@ module.exports = {
     watchContentBase: true,
     contentBase: [path.join(__dirname, 'public')],
     proxy: {
-     '/': 'http://localhost'
+     '/api': {
+       target:'http://localhost/api',
+       pathRewrite: {'^/api' : ''}
+     }
    }
   }
 }

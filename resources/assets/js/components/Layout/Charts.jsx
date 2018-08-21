@@ -14,7 +14,7 @@ class ChartsLayout extends React.Component {
   }
   render() {
     return <div className='dashboard__charts d-flex flex-row flex-wrap'>
-
+      Charts
     </div>
   }
 }

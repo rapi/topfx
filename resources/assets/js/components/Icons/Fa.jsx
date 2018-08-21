@@ -3,14 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCog,
   faUser,
-  faStroopwafel,
-  faSignOutAlt,
-  faChartPie
+  faTrashAlt
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faStroopwafel)
 library.add(faCog)
 library.add(faUser)
-library.add(faSignOutAlt)
-library.add(faChartPie)
+library.add(faTrashAlt)
 export default FontAwesomeIcon
