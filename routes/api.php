@@ -14,4 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/symbols_logo', 'SymbolController@upload_logo');
+Route::get('/symbols/{name}', 'SymbolController@get');
+Route::get('/symbols', 'SymbolController@get');
 Route::post('/symbols', 'SymbolController@add');
+Route::delete('/symbols/{id}', 'SymbolController@delete');

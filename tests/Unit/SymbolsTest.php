@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 
+
+
 class SymbolsTest extends TestCase
 {
     /**
@@ -15,25 +17,53 @@ class SymbolsTest extends TestCase
      */
     private $api_logo_url='/api/symbols_logo';
     private $api_url='/api/symbols';
-    private $img_dir='public/img_big/symbols/';
+    private $img_dir='public/img/big/symbols/';
+
+
+    public static $logo='';
+    public static $id='';
     public function testUploadLogo(){
       $images=scandir($this->img_dir);
       $file=new UploadedFile($this->img_dir.$images[2],true);
       $req=$this
           ->post($this->api_logo_url,
             ['logo' => $file]
-          )->dump();
+          )
+          ->assertJson([
+                'name' => true,
+            ])
+          ->json();
+      SymbolsTest::$logo= $req['name'];
 
     }
     public function testSymbolAdd()
     {
-      $this->post($this->api_url,[
+      $res=$this->post($this->api_url,[
           'name'=>'TEST',
+          'logo'=>SymbolsTest::$logo,
+          'desc'=>'TEST',
+          'provider'=>'TEST',
         ], array('HTTP_X-Requested-With' => 'XMLHttpRequest'))
+
           ->assertJson([
-                   'name' => true,
-               ]);
-
-
+              'name' => true,
+          ])
+          ->json();
+        SymbolsTest::$id=$res['id'];
+    }
+    public function testSymbolGet()
+    {
+      $res=$this->get($this->api_url.'/random')
+          ->assertJson([
+              'name' => true,
+          ]);
+        // SymbolsTest::$id=$res['id'];
+    }
+    public function testSymbolDelete()
+    {
+      $this->delete($this->api_url.'/'.SymbolsTest::$id)
+          ->assertJson([
+              'status' => true,
+          ]);
     }
 }
