@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import injectSheet from 'react-jss'
 import View from '../Style/View'
-// import 'components/dashboard.sass'
+import 'components/dashboard.sass'
 
 const Dashboard = (props) => (<View className='dashboard__container d-flex flex-md-row flex-column h-100'>
     <div className='dashboard__partLeft'>

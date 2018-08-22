@@ -1,5 +1,9 @@
-import {SYMBOLS_API, GET_RANDOM} from 'constants/symbols'
-import {get,del} from './requests'
+import {
+  SYMBOLS_API,
+  SYMBOLS_LOGO_API,
+  GET_RANDOM
+} from 'constants/symbols'
+import {get,del,post} from './requests'
 export const getRandom = () => {
   return(dispatch) => {
     return dispatch(getSymbols({name: 'random'})).then((e) => e[0])
@@ -17,4 +21,15 @@ export const getSymbols = (filter) => ((dispatch) => {
   else
     filter=false
   return get(url, filter);
+})
+export const findProviders = (name) => ((dispatch) => {
+  return get(SYMBOLS_API+'providers/'+name)
+
+})
+export const searchLogo = (name) => ((dispatch) => {
+  return get(SYMBOLS_LOGO_API+'search/'+name)
+})
+
+export const addSymbol = (form) => ((dispatch) => {
+  return post(SYMBOLS_API,form)
 })

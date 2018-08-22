@@ -22,29 +22,15 @@ class SymbolsTest extends TestCase
 
     public static $logo='';
     public static $id='';
-    public function testUploadLogo(){
-      $images=scandir($this->img_dir);
-      $file=new UploadedFile($this->img_dir.$images[2],true);
-      $req=$this
-          ->post($this->api_logo_url,
-            ['logo' => $file]
-          )
-          ->assertJson([
-                'name' => true,
-            ])
-          ->json();
-      SymbolsTest::$logo= $req['name'];
 
-    }
     public function testSymbolAdd()
     {
       $res=$this->post($this->api_url,[
           'name'=>'TEST',
-          'logo'=>SymbolsTest::$logo,
+          'logo'=>'public/img/big/symbols/AAPL.png',
           'desc'=>'TEST',
-          'provider'=>'TEST',
+          'providers'=>['TEST'],
         ], array('HTTP_X-Requested-With' => 'XMLHttpRequest'))
-
           ->assertJson([
               'name' => true,
           ])

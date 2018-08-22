@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/symbols_logo/search/{name}', 'SymbolController@searchLogo');
 Route::post('/symbols_logo', 'SymbolController@upload_logo');
+Route::get('/symbols/providers/{name}', 'SymbolController@providers');
 Route::get('/symbols/{name}', 'SymbolController@get');
 Route::get('/symbols', 'SymbolController@get');
 Route::post('/symbols', 'SymbolController@add');

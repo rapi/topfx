@@ -6,4 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Symbol extends Model
 {
   protected $table = 'symbols';
+  public function OHLC()
+    {
+        return $this->hasMany('App\Ohlc');
+    }
 }

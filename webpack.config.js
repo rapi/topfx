@@ -6,6 +6,7 @@ const Dotenv=require('dotenv-webpack');
 module.exports = {
   entry: './resources/assets/js/index.js',
   output: {
+    publicPath:'/',
     path: path.resolve(__dirname, 'public', 'js'),
     filename: 'app.js',
 
