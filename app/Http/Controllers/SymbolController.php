@@ -80,15 +80,14 @@ class SymbolController extends BaseController
       return json_encode($symbol);
     }
     public function edit(Request $request,$id){
-      // if($symbol->logo!==$request->input('logo')){
-        $symbol->logo=$this->grab_image($request->input('logo'), public_path('img/big/symbols/'));
-        return 11;
-        $symbol->save();
-      // }
       $symbol= Symbol::find($id);
       $symbol->name=      $request->input('name');
       $symbol->desc=      $request->input('desc');
       $symbol->provider=  $request->input('providers')[0];
+      if($symbol->logo!==$request->input('logo')){
+        $symbol->logo=$this->grab_image($request->input('logo'), public_path('img/big/symbols/'));
+        $symbol->save();
+      }
 
       return json_encode($symbol);
     }
