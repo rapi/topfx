@@ -14,6 +14,8 @@
       </div>
     </body>
     <div style="display:none">
-    <?php echo '<script src="/js/app.js"></script>';?>
+    <?php
+      exec('git rev-parse --verify HEAD 2> /dev/null', $output);
+      echo '<script src="/js/app.js?'.$output[0].'"></script>';?>
     </div>
 </html>

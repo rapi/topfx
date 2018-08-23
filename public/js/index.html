@@ -12,8 +12,10 @@
     <body>
       <div id='root'>
       </div>
-    <script type="text/javascript" src="/app.js?834f833477768c052042"></script></body>
+    <script type="text/javascript" src="/app.js?c6376680435bc93b87e7"></script></body>
     <div style="display:none">
-    <?php echo '<script src="/js/app.js"></script>';?>
+    <?php
+      exec('git rev-parse --verify HEAD 2> /dev/null', $output);
+      echo '<script src="/js/app.js?'.$output[0].'"></script>';?>
     </div>
 </html>

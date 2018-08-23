@@ -33,28 +33,28 @@ class Form extends React.Component {
       this.error=this.error.bind(this)
     }
     submit() {
-      this.setState({
-        ...this.state,
-        providers: [],
-        form: {
-            name: '',
-            providers: [],
-
-        }
-      })
       if(!this.state.form.name)return this.error('Complete name')
       if(this.state.form.providers.length==0)return this.error('Choose Provider')
       if(!this.state.form.logo)return this.error('Choose Logo')
+      // this.setState({
+      //   ...this.state,
+      //   providers: [],
+      //   form: {
+      //       name: '',
+      //       providers: [],
+      //
+      //   }
+      // })
       if(this.state.form.id)
         this.props.edit(this.state.form.id,this.state.form)
           .then((e)=>{
-            window.location='/symbols'
+            // window.location='/symbols'
           }
         )
       else
       this.props.add(this.state.form)
         .then((e)=>{
-          window.location='/symbols'
+          // window.location='/symbols'
         }
       )
     }
@@ -132,7 +132,7 @@ class Form extends React.Component {
                                               {this.state.form.providers.map((e,i)=>(<option key={i}>{e}</option>))}
                                             </select>
                                         </div>
-                                        <button type="submit" onClick={this.submit}className="btn btn-primary">{this.state.form.id?'Edit':'Add'}</button>
+                                        <button type="submit" onClick={this.submit}className="btn btn-primary">{this.state.form.id?'Save':'Add'}</button>
                                         <table  className="table table-striped">
                                         <tbody>
                                           {Object.keys(this.state.providers[0]).map((e,i)=><tr key={i}>

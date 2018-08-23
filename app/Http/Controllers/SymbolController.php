@@ -64,13 +64,11 @@ class SymbolController extends BaseController
       return array_slice($array_imgurl, 0, 20);
     }
     public function add(Request $request){
-      $random=$request->input('name').rand(999999,8888888888);
-      $this->grab_image($request->input('logo'), public_path('img/big/symbols/').$random);
       $symbol= new Symbol();
       $symbol->name=      $request->input('name');
       $symbol->desc=      $request->input('desc');
       $symbol->provider=  $request->input('providers')[0];
-      $symbol->logo=      $random;
+      $symbol->logo=$this->grab_image($request->input('logo'), public_path('img/big/symbols/'));
       $symbol->save();
 
       $OHLC=new OHLCHistory($symbol->provider);
@@ -82,25 +80,29 @@ class SymbolController extends BaseController
       return json_encode($symbol);
     }
     public function edit(Request $request,$id){
+      // if($symbol->logo!==$request->input('logo')){
+        $symbol->logo=$this->grab_image($request->input('logo'), public_path('img/big/symbols/'));
+        return 11;
+        $symbol->save();
+      // }
       $symbol= Symbol::find($id);
       $symbol->name=      $request->input('name');
       $symbol->desc=      $request->input('desc');
       $symbol->provider=  $request->input('providers')[0];
-      if($symbol->logo!==$request->input('logo')){
-        $random=$request->input('name').rand(999999,8888888888);
-        $this->grab_image($request->input('logo'), public_path('img/big/symbols/').$random);
-        $symbol->logo= $random;
-        $symbol->save();
-      }
 
       return json_encode($symbol);
     }
     function grab_image($url,$saveto){
         $ch = curl_init ($url);
+        $random=rand(999999,8888888888);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
         $raw=curl_exec($ch);
+        $content_type = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+        $content_type=explode('/',$content_type);
+        $name=$random.'.'.$content_type[count($content_type)-1];
+        $saveto.=$name;
         curl_close ($ch);
         if(file_exists($saveto)){
             unlink($saveto);
@@ -108,6 +110,7 @@ class SymbolController extends BaseController
         $fp = fopen($saveto,'x');
         fwrite($fp, $raw);
         fclose($fp);
+        return $name;
     }
 
 }
