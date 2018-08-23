@@ -3,6 +3,7 @@ import {getSymbols} from 'actions/symbols'
 import {connect} from 'react-redux'
 import 'components/symbols.sass'
 import Icon from 'Icons/Fa'
+import Image from 'Image/Image'
 import Remove from './Remove'
 import Form from './Form'
 
@@ -43,36 +44,48 @@ class List extends React.Component {
     }
     render() {
         let back = <button className='btn btn-primary mb-4' onClick={() => this.addForm(false)}>Back</button>
-        return <div className="container-flud">
-        <div className="row">
-            {
-                this.state.form
-                    ? <div className='w-100'>{back}<Form/></div>
-                    : (<div className="row symbols-list">
-                        <div className="col-sm-6 col-lg-2 col-md-3 mb-3 p-3">
-                            <a href='#' onClick={() => this.addForm(true)}>
-                                <div className="card p-1 text-center rounded-0">
+        return <div className="container-fluid">
+            <div className="row-fluid">
+                {
+
+                    this.state.form
+                        ? (
+                              (this.state.form===true)
+                              ?<div className='w-100'>{back}<Form/></div>
+                              :<div className='w-100'>{back}<Form form={this.state.form}/></div>
+                          )
+                        : (<div className="row symbols-list">
+                            <div className="col-sm-4 col-lg-1 col-md-3 mb-3">
+                              <div className="custom-card text-center">
+                                <a href='#' onClick={() => this.addForm(true)}>
+                                        <div className="custom-card-icon d-flex align-items-center justify-content-center">
+                                            <Icon icon="plus" size='2x'/>
+                                        </div>
+                                </a>
+                              </div>
+                            </div>
+
+                            {
+
+                                this.state.symbols.map((e, i) =><a href='#' key={i} onClick={()=>this.addForm(e)} ><div
+                                    className = "col-sm-4 col-lg-1 col-md-3 mb-3" > <div className="custom-card text-center">
+                                    <div className="custom-card-icon d-flex align-items-center justify-content-center flipped">
+                                        <Image className="" src={"symbols/" + e.logo} alt="Card image cap"/>
+                                    </div>
                                     <div className="card-body">
-                                        <Icon icon="plus" size='2x'/>
+                                        <h4>
+                                            {e.name}
+                                        </h4>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        {
-                            this.state.symbols.map((e,i) => <div key={i} className="custom-card m-3 text-center">
-                                <img className="" src={"/img/big/symbols/"+e.logo} alt="Card image cap"/>
-                                <div className="card-body">
-                                    <h4>
-                                      {e.name}
-                                    </h4>
-                                    <Remove id={e.id} onClick={this.fetch.bind(this)}/>
-                                </div>
+                            </div>
+                          </a>
+                          )
+                            }
                         </div>)
-                        }</div>)
-            }
-        </div>
-        </div>
-        ;
+                }
+            </div>
+        </div>;
 
     }
 }

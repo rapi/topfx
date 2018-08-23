@@ -19,4 +19,5 @@ Route::get('/symbols/providers/{name}', 'SymbolController@providers');
 Route::get('/symbols/{name}', 'SymbolController@get');
 Route::get('/symbols', 'SymbolController@get');
 Route::post('/symbols', 'SymbolController@add');
+Route::post('/symbols/{id}', 'SymbolController@edit');
 Route::delete('/symbols/{id}', 'SymbolController@delete');

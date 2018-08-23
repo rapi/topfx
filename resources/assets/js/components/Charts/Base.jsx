@@ -11,7 +11,7 @@ export default class Base extends React.Component{
     super(props);
     this.state={}
     // console.log(props.data);
-    this.state.margin= {top: 20, right: 0, bottom: 30, left: 10};
+    this.state.margin= {top: 20, right: 10, bottom: 30, left: 10};
     this.state.width=320-this.state.margin.left-this.state.margin.right;
     this.state.height=150-this.state.margin.top-this.state.margin.bottom;
   }
@@ -30,30 +30,33 @@ export default class Base extends React.Component{
   x=()=>scaleLinear()
       .domain([this.props.data[0].time,this.props.data.slice(-1)[0].time])
       .rangeRound([0,this.state.width])
-
   y=()=>scaleLinear()
     .domain([min(this.props.data,(e)=>e.close),max(this.props.data,(e)=>e.close)])
     .rangeRound([this.state.height,0])
   path=()=>()=>console.log('Please setup path method For base')
   redraw=()=>{}
+  updateGrid=()=>{
+    this.gridY
+        .attr("transform", "translate(0," + this.state.height + ")")
+        .call(this.make_x_gridlines()
+              .tickSize(-this.state.height)
+              .tickFormat(""))
+    this.gridX
+      .call(this.make_y_gridlines()
+      .tickSize(-this.state.width)
+      .tickFormat("")
+    )
+  }
   setUpGrid=()=>{
     this.gridG=select(this.nodeGroup)
       .append('g')
       .attr('class','grid')
-    this.gridG
+  this.gridX=  this.gridG
       .append('g')
       .attr('class','x')
-      .attr("transform", "translate(0," + this.state.height + ")")
-      .call(this.make_x_gridlines()
-            .tickSize(-this.state.height)
-            .tickFormat(""))
-    this.gridG
+    this.gridY=this.gridG
       .append('g')
       .attr('class','y')
-      .call(this.make_y_gridlines()
-            .tickSize(-this.state.width)
-            .tickFormat("")
-          )
   }
   draw=()=>{
     this.setUpGrid()
@@ -65,15 +68,18 @@ export default class Base extends React.Component{
     })
   }
   componentDidUpdate=()=>{
-
-    this.setPath()
+    if(this.props.data.length>0){
+      this.updateGrid()
+      this.setPath()
+    }
   }
   componentDidMount=()=>{
-
-    this.setWidth()
-    window.addEventListener("resize", ()=>this.setWidth());
-    this.draw()
-    this.setPath()
+    if(this.props.data.length>0){
+      this.setWidth()
+      window.addEventListener("resize", ()=>this.setWidth());
+      this.draw()
+      this.setPath()
+    }
   }
   setPath(){
     select(this.nodePath)

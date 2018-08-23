@@ -1,7 +1,7 @@
 import React from 'react'
 import Flip from 'Image/Flip'
 import Line from 'Charts/Line'
-
+import Card from 'Symbols/Card'
 class ChartsLayout extends React.Component {
   getTitle(e){
     let procent= parseInt((e.dailyHistory[e.dailyHistory.length-1].close*100)/e.dailyHistory[0].close-100);
@@ -14,7 +14,11 @@ class ChartsLayout extends React.Component {
   }
   render() {
     return <div className='dashboard__charts d-flex flex-row flex-wrap'>
-      Charts
+        {(new Array(6).fill(undefined)).map((e,i)=>
+          <div key={i} className="col-4">
+            <Card/>
+          </div>
+        )}
     </div>
   }
 }
