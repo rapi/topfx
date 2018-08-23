@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Ohlc;
 use App\Symbol;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -60,20 +61,7 @@ class SymbolController extends BaseController
           $array_imgurl[] = $array_imghtml_2[0];
         }
       }
-      return($array_imgurl); //array contains the urls for the big images
-      // $doc = new \DOMDocument('1.0', 'UTF-8');
-      // $html = file_get_contents("https://www.google.com/search?q=".str_replace(' ','+',$name)."+logo&tbm=isch" );
-      // return str_replace('<','&lt;',$html);
-      // $internalErrors = libxml_use_internal_errors(true);
-      // $doc->loadHTML($html);
-      // libxml_use_internal_errors($internalErrors);
-      // $table=$doc->getElementById('ires');
-      // $table=$table->getElementsByTagName('img');
-      // $result=[];
-      // foreach ($table as $t) {
-      //   $result[]=$t->getAttribute('src');
-      // }
-      // return $result;
+      return array_slice($array_imgurl, 0, 10);
     }
     public function add(Request $request){
       $random=$request->input('name').rand(999999,8888888888);
@@ -85,6 +73,12 @@ class SymbolController extends BaseController
       $symbol->logo=      $random;
       $symbol->save();
 
+      $OHLC=new OHLCHistory($symbol->provider);
+      $data=$OHLC->montly($symbol->name)->get();
+      foreach ($data as $q) {
+        $OHLC= Ohlc::firstOrNew($q);
+        $symbol->OHLC()->save($OHLC);
+      }
       return json_encode($symbol);
     }
     public function edit(Request $request,$id){
