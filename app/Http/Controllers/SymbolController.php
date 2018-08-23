@@ -61,7 +61,7 @@ class SymbolController extends BaseController
           $array_imgurl[] = $array_imghtml_2[0];
         }
       }
-      return array_slice($array_imgurl, 0, 10);
+      return array_slice($array_imgurl, 0, 20);
     }
     public function add(Request $request){
       $random=$request->input('name').rand(999999,8888888888);
