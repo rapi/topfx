@@ -44,7 +44,7 @@ class SymbolController extends BaseController
     }
     public function searchLogo($search_query){
       $search_query = urlencode( $search_query );
-      $googleRealURL = "https://www.google.com/search?hl=en&biw=1360&bih=652&tbs=isz%3Alt%2Cislt%3Asvga%2Citp%3Aphoto&tbm=isch&sa=1&q=".$search_query."&oq=".$search_query."&gs_l=psy-ab.12...0.0.0.10572.0.0.0.0.0.0.0.0..0.0....0...1..64.psy-ab..0.0.0.wFdNGGlUIRk";
+      $googleRealURL = "https://www.google.com/search?hl=en&biw=1360&bih=652&tbm=isch&sa=1&q=".$search_query."&oq=".$search_query;
 
       // Call Google with CURL + User-Agent
       $ch = curl_init($googleRealURL);
