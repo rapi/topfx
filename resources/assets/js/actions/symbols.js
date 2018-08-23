@@ -46,5 +46,5 @@ export const addSymbol = (form) => ((dispatch) => {
 })
 
 export const editSymbol = (id,form) => ((dispatch) => {
-  return post(SYMBOLS_API+'/'+id,form)
+  return post(SYMBOLS_API+id,form)
 })
