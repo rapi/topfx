@@ -15,7 +15,7 @@ class ChartsLayout extends React.Component {
   render() {
     return <div className='dashboard__charts d-flex flex-row flex-wrap'>
         {(new Array(6).fill(undefined)).map((e,i)=>
-          <div key={i} className="col-4">
+          <div key={i} className="col-lg-4">
             <Card/>
           </div>
         )}
