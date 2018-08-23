@@ -49,6 +49,12 @@ module.exports = {
           "style-loader", // creates style nodes from JS strings
           "css-loader", // translates CSS into CommonJS
           {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')]
+            }
+          }, // translates CSS into CommonJS
+          {
          loader: "sass-loader", options: {
            sourceMap: true,
            data:
@@ -56,8 +62,8 @@ module.exports = {
            '@import "resources/assets/scss/variables";'+
            '@import "~bootstrap/scss/variables";'+
            '@import "~bootstrap/scss/mixins";'
-         }
-       } // compiles Sass to CSS, using Node Sass by default
+         },
+       }, // compiles Sass to CSS, using Node Sass by default
         ]
       }, {
         test: /\.css$/,
@@ -70,7 +76,8 @@ module.exports = {
       hash: true,
       template: 'resources/views/OHLC.blade.php' //relative to root of the application
     }),
-    new Dotenv()
+    new Dotenv(),
+    require('autoprefixer')
 
   ],
   devServer: {

@@ -67,7 +67,7 @@ class List extends React.Component {
 
                             {
 
-                                this.state.symbols.map((e, i) =><a href='#' key={i} onClick={()=>this.addForm(e)} ><div
+                                this.state.symbols.map((e, i) =><div  key={i}><a href='#' onClick={()=>this.addForm(e)} ><div
                                     className = "col-sm-4 col-lg-1 col-md-3 mb-3" > <div className="custom-card text-center">
                                     <div className="custom-card-icon d-flex align-items-center justify-content-center flipped">
                                         <Image className="" src={"symbols/" + e.logo} alt="Card image cap"/>
@@ -80,6 +80,10 @@ class List extends React.Component {
                                 </div>
                             </div>
                           </a>
+                          <div className="remove" >
+                              <Remove id={e.id} onClick={()=>this.fetch() } />
+                          </div>
+                        </div>
                           )
                             }
                         </div>)

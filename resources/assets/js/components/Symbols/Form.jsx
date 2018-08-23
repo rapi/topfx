@@ -33,6 +33,15 @@ class Form extends React.Component {
       this.error=this.error.bind(this)
     }
     submit() {
+      this.setState({
+        ...this.state,
+        providers: [],
+        form: {
+            name: '',
+            providers: [],
+
+        }
+      })
       if(!this.state.form.name)return this.error('Complete name')
       if(this.state.form.providers.length==0)return this.error('Choose Provider')
       if(!this.state.form.logo)return this.error('Choose Logo')
