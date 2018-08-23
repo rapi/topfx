@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('OHLC');
-});
+Route::get('/', function () { return view('OHLC');});
+Route::get('/symbols', function () { return view('OHLC');});
