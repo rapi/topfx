@@ -9,11 +9,6 @@ Php version on laravel for building and fetching graphics
 ```bash
 npm i
 composer install
-echo ''>database/ochl.sqlite
-php artisan migrate
-cp .env.example .env
-php artisan key:generate
-mkdir public/img/big/symbols -p
 ```
 
 ## Development
