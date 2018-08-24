@@ -1,5 +1,12 @@
 <?php
-
+/*
+if(!file_exists('log.json'))
+  touch('log.json');
+$json=file_get_contents('log.json');
+$json=json_decode($json,1);
+if(!@$json[$_SERVER['REMOTE_ADDR']])$json[$_SERVER['REMOTE_ADDR']]=[];
+$json[$_SERVER['REMOTE_ADDR']][]=date('m-d-Y h:i:s a', time());
+file_put_contents('log.json',json_encode($json));
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
